@@ -9,7 +9,10 @@ from entities.fruit import Fruit
 class Game:
     def __init__(self):
         self.player = None
+        self.level_colour = -1
         self.level = -1
+
+        self.next_level()
     
     def draw_text(self, text, y, x=None):
         if x == None:
@@ -110,12 +113,12 @@ class Game:
         self.orbs = [o for o in self.orbs if o.timer < 250 and o.y > -40]
 
         if self.timer % 100 == 0 and len(self.pending_enemies + self.enemies) > 0:
-            self.fruits.append(Fruit((randint(70, 730), randint(75, 400))))
+            self.fruits.append(Fruit(self,(randint(70, 730), randint(75, 400))))
 
         if self.timer % 81 == 0 and len(self.pending_enemies) > 0 and len(self.enemies) < self.max_enemies():
             robot_type = self.pending_enemies.pop()
             pos = (self.get_robot_spawn_x(), -30)
-            self.enemies.append(Robot(pos, robot_type))
+            self.enemies.append(Robot(self, pos, robot_type))
 
         if len(self.pending_enemies + self.fruits + self.enemies + self.pops) == 0:
             if len([orb for orb in self.orbs if orb.trapped_enemy_type != None]) == 0:

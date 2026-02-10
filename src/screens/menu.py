@@ -2,7 +2,7 @@ from screen import Screen
 from game import Game
 from entities.player import Player
 from play import PlayerScreen
-import pgzero
+from pgzero.builtins import screen
 
 class MenuScreen(Screen):
     def __init__(self, game):
@@ -13,7 +13,6 @@ class MenuScreen(Screen):
             new_game = Game()
             player = Player(new_game)
             new_game.player = player
-            
             app.change_screen(PlayerScreen(new_game))
         else:
             self.game.update()
