@@ -1,5 +1,9 @@
 from entities.gravity_actor import GravityActor
+from entities.orb import Orb
 from consts import WIDTH
+# to do for future sid, please implement the player logic here with input state (COMPLETED)
+# further to do finish task C (Pause menu)
+# further further to do finish documentation
 class Player(GravityActor):
     def __init__(self, game):
         super().__init__(game, (0, 0))
@@ -17,11 +21,7 @@ class Player(GravityActor):
         self.blowing_orb = None
 
     def hit_test(self, other):
-        # Check for collision between player and bolt - called from Bolt.update. Also check hurt_timer - after being hurt,
-        # there is a period during which the player cannot be hurt again
         if self.collidepoint(other.pos) and self.hurt_timer < 0:
-            # Player loses 1 health, is knocked in the direction the bolt had been moving, and can't be hurt again
-            # for a while
             self.hurt_timer = 200
             self.health -= 1
             self.vel_y = -12
@@ -65,26 +65,21 @@ class Player(GravityActor):
                 if self.fire_timer < 10:
                     self.move(dx, 0, 4)
 
-            # Do we need to create a new orb? Space must have been pressed and released, the minimum time between
-            # orbs must have passed, and there is a limit of 5 orbs.
-            if  input_state.jump_pressed and self.fire_timer <= 0 and len(game.orbs) < 5:
-                # x position will be 38 pixels in front of the player position, while ensuring it is within the
-                # bounds of the level
+            if  input_state.fire_pressed and self.fire_timer <= 0 and len(self.game.orbs) < 5:
                 x = min(730, max(70, self.x + self.direction_x * 38))
                 y = self.y - 35
-                self.blowing_orb = Orb((x,y), self.direction_x)
-                game.orbs.append(self.blowing_orb)
-                game.play_sound("blow", 4)
+                self.blowing_orb = Orb(self.game, (x,y), self.direction_x)
+                self.game.orbs.append(self.blowing_orb)
+                self.game.play_sound("blow", 4)
                 self.fire_timer = 20
 
-            if keyboard.up and self.vel_y == 0 and self.landed:
-                # Jump
+            if input_state.jump_pressed and self.vel_y == 0 and self.landed:
                 self.vel_y = -16
                 self.landed = False
-                game.play_sound("jump")
+                self.game.play_sound("jump")
 
         # Holding down space causes the current orb (if there is one) to be blown further
-        if keyboard.space:
+        if input_state.fire_held:
             if self.blowing_orb:
                 # Increase blown distance up to a maximum of 120
                 self.blowing_orb.blown_frames += 4
@@ -103,10 +98,10 @@ class Player(GravityActor):
                 if self.health > 0:
                     self.image = "recoil" + dir_index
                 else:
-                    self.image = "fall" + str((game.timer // 4) % 2)
+                    self.image = "fall" + str((self.game.timer // 4) % 2)
             elif self.fire_timer > 0:
                 self.image = "blow" + dir_index
             elif dx == 0:
                 self.image = "still"
             else:
-                self.image = "run" + dir_index + str((game.timer // 8) % 4)
+                self.image = "run" + dir_index + str((self.game.timer // 8) % 4)
