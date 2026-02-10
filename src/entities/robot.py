@@ -2,8 +2,8 @@ class Robot(GravityActor):
     TYPE_NORMAL = 0
     TYPE_AGGRESSIVE = 1
 
-    def __init__(self, pos, type):
-        super().__init__(pos)
+    def __init__(self, game, pos, type):
+        super().__init__(game, pos)
 
         self.type = type
 

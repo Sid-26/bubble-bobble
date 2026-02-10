@@ -1,6 +1,6 @@
 class Player(GravityActor):
-    def __init__(self):
-        super().__init__((0, 0))
+    def __init__(self, game):
+        super().__init__(game, (0, 0))
 
         self.lives = 2
         self.score = 0
@@ -26,31 +26,23 @@ class Player(GravityActor):
             self.landed = False
             self.direction_x = other.direction_x
             if self.health > 0:
-                game.play_sound("ouch", 4)
+                self.game.play_sound("ouch", 4)
             else:
-                game.play_sound("die")
+                self.game.play_sound("die")
             return True
         else:
             return False
 
-    def update(self):
-        # Call GravityActor.update - parameter is whether we want to perform collision detection as we fall. If health
-        # is zero, we want the player to just fall out of the level
+    def update(self, input_state):
         super().update(self.health > 0)
 
         self.fire_timer -= 1
         self.hurt_timer -= 1
 
         if self.landed:
-            # Hurt timer starts at 200, but drops to 100 once the player has landed
             self.hurt_timer = min(self.hurt_timer, 100)
 
         if self.hurt_timer > 100:
-            # We've just been hurt. Either carry out the sideways motion from being knocked by a bolt, or if health is
-            # zero, we're dropping out of the level, so check for our sprite reaching a certain Y coordinate before
-            # reducing our lives count and responding the player. We check for the Y coordinate being the screen height
-            # plus 50%, rather than simply the screen height, because the former effectively gives us a short delay
-            # before the player respawns.
             if self.health > 0:
                 self.move(self.direction_x, 0, 4)
             else:
@@ -58,24 +50,22 @@ class Player(GravityActor):
                     self.lives -= 1
                     self.reset()
         else:
-            # We're not hurt
-            # Get keyboard input. dx represents the direction the player is facing
             dx = 0
-            if keyboard.left:
+            if input_state.left:
                 dx = -1
-            elif keyboard.right:
+            elif input_state.right:
                 dx = 1
 
             if dx != 0:
                 self.direction_x = dx
 
-                # If we haven't just fired an orb, carry out horizontal movement
+
                 if self.fire_timer < 10:
                     self.move(dx, 0, 4)
 
             # Do we need to create a new orb? Space must have been pressed and released, the minimum time between
             # orbs must have passed, and there is a limit of 5 orbs.
-            if space_pressed() and self.fire_timer <= 0 and len(game.orbs) < 5:
+            if  input_state.jump_pressed and self.fire_timer <= 0 and len(game.orbs) < 5:
                 # x position will be 38 pixels in front of the player position, while ensuring it is within the
                 # bounds of the level
                 x = min(730, max(70, self.x + self.direction_x * 38))

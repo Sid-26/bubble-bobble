@@ -1,8 +1,8 @@
 class Bolt(CollideActor):
     SPEED = 7
 
-    def __init__(self, pos, dir_x):
-        super().__init__(pos)
+    def __init__(self, game, pos, dir_x):
+        super().__init__(game, pos)
 
         self.direction_x = dir_x
         self.active = True

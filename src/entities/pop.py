@@ -1,6 +1,6 @@
 class Pop(Actor):
-    def __init__(self, pos, type):
-        super().__init__("blank", pos)
+    def __init__(self, game, pos, type):
+        super().__init__("blank", game, pos)
 
         self.type = type
         self.timer = -1

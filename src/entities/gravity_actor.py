@@ -5,8 +5,8 @@ from game_utils import sign
 class GravityActor(CollideActor):
     MAX_FALL_SPEED = 10
 
-    def __init__(self, pos):
-        super().__init__(pos, ANCHOR_CENTRE_BOTTOM)
+    def __init__(self, game, pos):
+        super().__init__(game, pos, ANCHOR_CENTRE_BOTTOM)
 
         self.vel_y = 0
         self.landed = False

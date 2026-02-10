@@ -5,8 +5,8 @@ class Fruit(GravityActor):
     EXTRA_HEALTH = 3
     EXTRA_LIFE = 4
 
-    def __init__(self, pos, trapped_enemy_type=0):
-        super().__init__(pos)
+    def __init__(self, game, pos, trapped_enemy_type=0):
+        super().__init__(game, pos)
 
         # Choose which type of fruit we're going to be.
         if trapped_enemy_type == Robot.TYPE_NORMAL:

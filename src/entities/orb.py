@@ -1,8 +1,8 @@
 class Orb(CollideActor):
     MAX_TIMER = 250
 
-    def __init__(self, pos, dir_x):
-        super().__init__(pos)
+    def __init__(self, game, pos, dir_x):
+        super().__init__(game, pos)
 
         # Orbs are initially blown horizontally, then start floating upwards
         self.direction_x = dir_x
