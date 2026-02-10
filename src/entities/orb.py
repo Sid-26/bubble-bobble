@@ -1,3 +1,7 @@
+from entities.collide_actor import CollideActor
+from entities.fruit import Fruit
+from entities.pop import Pop
+from random import randint
 class Orb(CollideActor):
     MAX_TIMER = 250
 
@@ -34,12 +38,12 @@ class Orb(CollideActor):
             self.floating = True
         elif self.timer >= Orb.MAX_TIMER or self.y <= -40:
             # Pop if our lifetime has run out or if we have gone off the top of the screen
-            game.pops.append(Pop(self.pos, 1))
+            self.game.pops.append(Pop(self.game,self.pos, 1))
             if self.trapped_enemy_type != None:
                 # trapped_enemy_type is either zero or one. A value of one means there's a chance of creating a
                 # powerup such as an extra life or extra health
-                game.fruits.append(Fruit(self.pos, self.trapped_enemy_type))
-            game.play_sound("pop", 4)
+                self.game.fruits.append(Fruit(self.game, self.pos, self.trapped_enemy_type))
+            self.game.play_sound("pop", 4)
 
         if self.timer < 9:
             # Orb grows to full size over the course of 9 frames - the animation frame updating every 3 frames

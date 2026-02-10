@@ -1,7 +1,5 @@
-import pygame, pgzero
 from consts import ANCHOR_CENTRE, GRID_BLOCK_SIZE
-
-# to do figure out block
+from pgzero.builtins import Actor
 
 class CollideActor(Actor):
     def __init__(self, game, pos, anchor=ANCHOR_CENTRE):

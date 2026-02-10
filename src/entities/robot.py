@@ -1,7 +1,10 @@
-class Robot(GravityActor):
-    TYPE_NORMAL = 0
-    TYPE_AGGRESSIVE = 1
+from consts import TYPE_AGGRESSIVE, TYPE_NORMAL
+from entities.gravity_actor import GravityActor
+from entities.bolt import Bolt
+from random import randint, choice, random
+from game_utils import sign
 
+class Robot(GravityActor):
     def __init__(self, game, pos, type):
         super().__init__(game, pos)
 
@@ -28,15 +31,15 @@ class Robot(GravityActor):
             # Randomly choose a direction to move in
             # If there's a player, there's a two thirds chance that we'll move towards them
             directions = [-1, 1]
-            if game.player:
-                directions.append(sign(game.player.x - self.x))
+            if self.game.player:
+                directions.append(sign(self.game.player.x - self.x))
             self.direction_x = choice(directions)
             self.change_dir_timer = randint(100, 250)
 
         # The more powerful type of robot can deliberately shoot at orbs - turning to face them if necessary
         if self.type == Robot.TYPE_AGGRESSIVE and self.fire_timer >= 24:
             # Go through all orbs to see if any can be shot at
-            for orb in game.orbs:
+            for orb in self.game.orbs:
                 # The orb must be at our height, and within 200 pixels on the x axis
                 if orb.y >= self.top and orb.y < self.bottom and abs(orb.x - self.x) < 200:
                     self.direction_x = sign(orb.x - self.x)
@@ -46,24 +49,24 @@ class Robot(GravityActor):
         # Check to see if we can fire at player
         if self.fire_timer >= 12:
             # Random chance of firing each frame. Likelihood increases 10 times if player is at the same height as us
-            fire_probability = game.fire_probability()
-            if game.player and self.top < game.player.bottom and self.bottom > game.player.top:
+            fire_probability = self.game.fire_probability()
+            if self.game.player and self.top < self.game.player.bottom and self.bottom > game.player.top:
                 fire_probability *= 10
             if random() < fire_probability:
                 self.fire_timer = 0
-                game.play_sound("laser", 4)
+                self.game.play_sound("laser", 4)
 
         elif self.fire_timer == 8:
             #  Once the fire timer has been set to 0, it will count up - frame 8 of the animation is when the actual bolt is fired
-            game.bolts.append(Bolt((self.x + self.direction_x * 20, self.y - 38), self.direction_x))
+            self.game.bolts.append(Bolt((self.x + self.direction_x * 20, self.y - 38), self.direction_x))
 
         # Am I colliding with an orb? If so, become trapped by it
-        for orb in game.orbs:
+        for orb in self.game.orbs:
             if orb.trapped_enemy_type == None and self.collidepoint(orb.center):
                 self.alive = False
                 orb.floating = True
                 orb.trapped_enemy_type = self.type
-                game.play_sound("trap", 4)
+                self.game.play_sound("trap", 4)
                 break
 
         # Choose and set sprite image
@@ -72,6 +75,6 @@ class Robot(GravityActor):
         if self.fire_timer < 12:
             image += str(5 + (self.fire_timer // 4))
         else:
-            image += str(1 + ((game.timer // 4) % 4))
+            image += str(1 + ((self.game.timer // 4) % 4))
         self.image = image
 

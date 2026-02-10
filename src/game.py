@@ -2,7 +2,7 @@ from random import randint, shuffle
 from game_utils import draw_text
 from pgzero.builtins import screen, sounds
 from game_utils import char_width
-from consts import WIDTH, CHAR_WIDTH, IMAGE_WIDTH, LEVELS, NUM_COLUMNS, GRID_BLOCK_SIZE, LEVEL_X_OFFSET, NUM_ROWS
+from consts import WIDTH, CHAR_WIDTH, IMAGE_WIDTH, LEVELS, NUM_COLUMNS, GRID_BLOCK_SIZE, LEVEL_X_OFFSET, NUM_ROWS, TYPE_NORMAL, TYPE_AGGRESSIVE
 from entities.robot import Robot
 from entities.fruit import Fruit
 
@@ -13,6 +13,34 @@ class Game:
         self.level = -1
 
         self.next_level()
+    
+    def next_level(self):
+        self.level_colour = (self.level_colour + 1) % 4
+        self.level += 1
+
+        self.grid = LEVELS[self.level % len(LEVELS)]
+        self.grid = self.grid + [self.grid[0]]
+
+        self.timer = -1
+
+        if self.player:
+            self.player.reset()
+
+        self.fruits = []
+        self.bolts = []
+        self.enemies = []
+        self.pops = []
+        self.orbs = []
+
+        num_enemies = 10 + self.level
+        num_strong_enemies = 1 + int(self.level / 1.5)
+        num_weak_enemies = num_enemies - num_strong_enemies
+
+        self.pending_enemies = (num_strong_enemies * [TYPE_AGGRESSIVE] + num_weak_enemies * [TYPE_NORMAL])
+
+        shuffle(self.pending_enemies)
+
+        self.play_sound("level", 1)
     
     def draw_text(self, text, y, x=None):
         if x == None:
@@ -60,34 +88,6 @@ class Game:
 
     def max_enemies(self):
         return min((self.level + 6) // 2, 8)
-
-    def next_level(self):
-        self.level_colour = (self.level_colour + 1) % 4
-        self.level += 1
-
-        self.grid = LEVELS[self.level % len(LEVELS)]
-        self.grid = self.grid + [self.grid[0]]
-
-        self.timer = -1
-
-        if self.player:
-            self.player.reset()
-
-        self.fruits = []
-        self.bolts = []
-        self.enemies = []
-        self.pops = []
-        self.orbs = []
-
-        num_enemies = 10 + self.level
-        num_strong_enemies = 1 + int(self.level / 1.5)
-        num_weak_enemies = num_enemies - num_strong_enemies
-
-        self.pending_enemies = (num_strong_enemies * [1] + num_weak_enemies * [0])
-
-        shuffle(self.pending_enemies)
-
-        self.play_sound("level", 1)
 
     def get_robot_spawn_x(self):
         r = randint(0, NUM_COLUMNS-1)

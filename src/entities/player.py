@@ -1,3 +1,5 @@
+from entities.gravity_actor import GravityActor
+from consts import WIDTH
 class Player(GravityActor):
     def __init__(self, game):
         super().__init__(game, (0, 0))

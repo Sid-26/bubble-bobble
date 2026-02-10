@@ -8,6 +8,9 @@ NUM_COLUMNS = 28
 LEVEL_X_OFFSET = 50
 GRID_BLOCK_SIZE = 25
 
+TYPE_NORMAL = 0
+TYPE_AGGRESSIVE = 1
+
 ANCHOR_CENTRE = ("center", "center")
 ANCHOR_CENTRE_BOTTOM = ("center", "bottom")
 IMAGE_WIDTH = {"life":44, "plus":40, "health":40}

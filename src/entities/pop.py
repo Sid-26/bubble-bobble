@@ -1,3 +1,4 @@
+from pgzero.builtins import Actor
 class Pop(Actor):
     def __init__(self, game, pos, type):
         super().__init__("blank", game, pos)

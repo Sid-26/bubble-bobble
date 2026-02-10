@@ -1,3 +1,5 @@
+from entities.collide_actor import CollideActor
+
 class Bolt(CollideActor):
     SPEED = 7
 
@@ -8,17 +10,15 @@ class Bolt(CollideActor):
         self.active = True
 
     def update(self):
-        # Move horizontally and check to see if we've collided with a block
         if self.move(self.direction_x, 0, Bolt.SPEED):
             # Collided
             self.active = False
         else:
-            # We didn't collide with a block - check to see if we collided with an orb or the player
-            for obj in game.orbs + [game.player]:
+            for obj in self.game.orbs + [self.game.player]:
                 if obj and obj.hit_test(self):
                     self.active = False
                     break
 
         direction_idx = "1" if self.direction_x > 0 else "0"
-        anim_frame = str((game.timer // 4) % 2)
+        anim_frame = str((self.game.timer // 4) % 2)
         self.image = "bolt" + direction_idx + anim_frame
