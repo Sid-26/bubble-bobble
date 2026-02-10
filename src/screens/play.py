@@ -1,8 +1,8 @@
 from screen import Screen
-from game import draw_status
 from game_over import GameOverScreen
 
 class PlayerScreen(Screen):
+
     def __init__(self, game):
         self.game = game
     
@@ -15,4 +15,7 @@ class PlayerScreen(Screen):
     
     def draw(self):
         self.game.draw()
-        draw_status()
+        self.draw_status()
+
+    def draw_status(self):
+        pass
