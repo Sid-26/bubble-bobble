@@ -18,6 +18,21 @@ class Game:
         for char in text:
             screen.blit("font0"+str(ord(char)), (x, y))
             x += char_width(char)
+    
+    def block(self, x, y):
+        grid_x = (x - LEVEL_X_OFFSET) // GRID_BLOCK_SIZE
+        grid_y = y // GRID_BLOCK_SIZE
+
+        if grid_y > 0 and grid_y < NUM_ROWS:
+            row = self.grid[grid_y]
+            return (
+                grid_x >= 0 and
+                grid_x < NUM_COLUMNS and
+                len(row) > 0 and
+                row[grid_x] != " "
+            )
+        else:
+            return False
 
     def draw_status(self):
         number_width = CHAR_WIDTH[0]

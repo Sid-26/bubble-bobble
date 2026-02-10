@@ -1,4 +1,4 @@
-import pygame, pgzero, pgzrun, sys
+import pygame, pgzero, pgzrun
 from input import InputStateManager
 
 class App:

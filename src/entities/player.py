@@ -1,7 +1,5 @@
 class Player(GravityActor):
     def __init__(self):
-        # Call constructor of parent class. Initial pos is 0,0 but reset is always called straight afterwards which
-        # will set the actual starting position.
         super().__init__((0, 0))
 
         self.lives = 2

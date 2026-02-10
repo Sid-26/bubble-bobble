@@ -1,7 +1,7 @@
 from screen import Screen
 from menu import MenuScreen
 from game import Game
-import pgzero
+from pgzero.builtins import screen
 
 class GameOverScreen(Screen):
     def _init_(self, game):
@@ -13,5 +13,5 @@ class GameOverScreen(Screen):
     
     def draw(self):
         self.game.draw()
-        draw_status()
+        self.game.draw_status()
         screen.blit("over", (0, 0))

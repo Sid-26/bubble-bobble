@@ -1,11 +1,12 @@
 import pygame, pgzero
 from consts import ANCHOR_CENTRE, GRID_BLOCK_SIZE
 
-# to do figure out block function
+# to do figure out block
 
 class CollideActor(Actor):
-    def __init__(self, pos, anchor=ANCHOR_CENTRE):
+    def __init__(self, game, pos, anchor=ANCHOR_CENTRE):
         super().__init__("blank", pos, anchor)
+        self.game = game
 
     def move(self, dx, dy, speed):
         new_x, new_y = int(self.x), int(self.y)
@@ -22,7 +23,7 @@ class CollideActor(Actor):
             if ((dy > 0 and new_y % GRID_BLOCK_SIZE == 0 or
                  dx > 0 and new_x % GRID_BLOCK_SIZE == 0 or
                  dx < 0 and new_x % GRID_BLOCK_SIZE == GRID_BLOCK_SIZE-1)
-                and block(new_x, new_y)):
+                and self.game.block(new_x, new_y)):
                     return True
 
             # We only update the object's position if there wasn't a block there.
@@ -30,5 +31,3 @@ class CollideActor(Actor):
 
         # Didn't collide with block or edge of level
         return False
-    
-    
