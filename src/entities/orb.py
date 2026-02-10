@@ -38,7 +38,7 @@ class Orb(CollideActor):
             self.floating = True
         elif self.timer >= Orb.MAX_TIMER or self.y <= -40:
             # Pop if our lifetime has run out or if we have gone off the top of the screen
-            self.game.pops.append(Pop(self.game,self.pos, 1))
+            self.game.pops.append(Pop(self.game, self.pos, 1))
             if self.trapped_enemy_type != None:
                 # trapped_enemy_type is either zero or one. A value of one means there's a chance of creating a
                 # powerup such as an extra life or extra health

@@ -1,3 +1,7 @@
+from random import choice
+from entities.gravity_actor import GravityActor
+from entities.pop import Pop
+from consts import TYPE_NORMAL
 class Fruit(GravityActor):
     APPLE = 0
     RASPBERRY = 1
@@ -9,7 +13,7 @@ class Fruit(GravityActor):
         super().__init__(game, pos)
 
         # Choose which type of fruit we're going to be.
-        if trapped_enemy_type == Robot.TYPE_NORMAL:
+        if trapped_enemy_type == TYPE_NORMAL:
             self.type = choice([Fruit.APPLE, Fruit.RASPBERRY, Fruit.LEMON])
         else:
             # If trapped_enemy_type is 1, it means this fruit came from bursting an orb containing the more dangerous type
@@ -27,16 +31,16 @@ class Fruit(GravityActor):
         super().update()
 
         # Does the player exist, and are they colliding with us?
-        if game.player and game.player.collidepoint(self.center):
+        if self.game.player and self.game.player.collidepoint(self.center):
             if self.type == Fruit.EXTRA_HEALTH:
-                game.player.health = min(3, game.player.health + 1)
-                game.play_sound("bonus")
+                self.game.player.health = min(3, self.game.player.health + 1)
+                self.game.play_sound("bonus")
             elif self.type == Fruit.EXTRA_LIFE:
-                game.player.lives += 1
-                game.play_sound("bonus")
+                self.game.player.lives += 1
+                self.game.play_sound("bonus")
             else:
-                game.player.score += (self.type + 1) * 100
-                game.play_sound("score")
+                self.game.player.score += (self.type + 1) * 100
+                self.game.play_sound("score")
 
             self.time_to_live = 0   # Disappear
         else:
@@ -44,7 +48,7 @@ class Fruit(GravityActor):
 
         if self.time_to_live <= 0:
             # Create 'pop' animation
-            game.pops.append(Pop((self.x, self.y - 27), 0))
+            self.game.pops.append(Pop(self.game,(self.x, self.y - 27), 0))
 
-        anim_frame = str([0, 1, 2, 1][(game.timer // 6) % 4])
+        anim_frame = str([0, 1, 2, 1][(self.game.timer // 6) % 4])
         self.image = "fruit" + str(self.type) + anim_frame

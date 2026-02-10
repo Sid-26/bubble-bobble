@@ -37,7 +37,7 @@ class Robot(GravityActor):
             self.change_dir_timer = randint(100, 250)
 
         # The more powerful type of robot can deliberately shoot at orbs - turning to face them if necessary
-        if self.type == Robot.TYPE_AGGRESSIVE and self.fire_timer >= 24:
+        if self.type == TYPE_AGGRESSIVE and self.fire_timer >= 24:
             # Go through all orbs to see if any can be shot at
             for orb in self.game.orbs:
                 # The orb must be at our height, and within 200 pixels on the x axis
@@ -50,7 +50,7 @@ class Robot(GravityActor):
         if self.fire_timer >= 12:
             # Random chance of firing each frame. Likelihood increases 10 times if player is at the same height as us
             fire_probability = self.game.fire_probability()
-            if self.game.player and self.top < self.game.player.bottom and self.bottom > game.player.top:
+            if self.game.player and self.top < self.game.player.bottom and self.bottom > self.game.player.top:
                 fire_probability *= 10
             if random() < fire_probability:
                 self.fire_timer = 0
@@ -58,7 +58,7 @@ class Robot(GravityActor):
 
         elif self.fire_timer == 8:
             #  Once the fire timer has been set to 0, it will count up - frame 8 of the animation is when the actual bolt is fired
-            self.game.bolts.append(Bolt((self.x + self.direction_x * 20, self.y - 38), self.direction_x))
+            self.game.bolts.append(Bolt(self.game,(self.x + self.direction_x * 20, self.y - 38), self.direction_x))
 
         # Am I colliding with an orb? If so, become trapped by it
         for orb in self.game.orbs:
