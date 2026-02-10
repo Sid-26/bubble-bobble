@@ -3,3 +3,6 @@ class Game:
 
 class Player:
     pass
+
+def draw_status():
+    pass
