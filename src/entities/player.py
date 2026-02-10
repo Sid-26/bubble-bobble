@@ -1,6 +1,6 @@
 from entities.gravity_actor import GravityActor
 from entities.orb import Orb
-from consts import WIDTH
+from consts import HEIGHT, WIDTH
 # to do for future sid, please implement the player logic here with input state (COMPLETED)
 # further to do finish task C (Pause menu)
 # further further to do finish documentation
