@@ -7,8 +7,8 @@ from entities.robot import Robot
 from entities.fruit import Fruit
 
 class Game:
-    def __init__(self, player=None):
-        self.player = player
+    def __init__(self):
+        self.player = None
         self.level = -1
     
     def draw_text(self, text, y, x=None):

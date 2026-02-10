@@ -10,7 +10,10 @@ class MenuScreen(Screen):
     
     def update(self, app, input_state):
         if input_state.fire_pressed:
-            new_game = Game(Player())
+            new_game = Game()
+            player = Player(new_game)
+            new_game.player = player
+            
             app.change_screen(PlayerScreen(new_game))
         else:
             self.game.update()
