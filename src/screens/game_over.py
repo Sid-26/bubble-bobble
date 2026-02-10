@@ -1,6 +1,6 @@
 from screen import Screen
 from menu import MenuScreen
-from game import Game, draw_status
+from game import Game
 import pgzero
 
 class GameOverScreen(Screen):
