@@ -1,9 +1,8 @@
 from .screen import Screen
 from src.game import Game
-from pgzero.builtins import screen
 
 class GameOverScreen(Screen):
-    def _init_(self, game):
+    def __init__(self, game):
         self.game = game
     
     def update(self, app, input_state):

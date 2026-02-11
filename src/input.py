@@ -24,8 +24,8 @@ class InputStateManager:
 
         state.jump_pressed = keyboard.up and not self.prev_jump
         
-        state.fire_pressed = keyboard.space
-        state.fire_held = keyboard.space and not self.prev_fire
+        state.fire_pressed = keyboard.space and not self.prev_fire
+        state.fire_held = keyboard.space
 
         state.pause_pressed = keyboard.p and not self.prev_pause
 

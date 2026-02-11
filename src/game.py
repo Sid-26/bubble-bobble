@@ -3,7 +3,7 @@ from src.game_utils import char_width
 from src.consts import WIDTH, CHAR_WIDTH, IMAGE_WIDTH, LEVELS, NUM_COLUMNS, GRID_BLOCK_SIZE, LEVEL_X_OFFSET, NUM_ROWS, TYPE_NORMAL, TYPE_AGGRESSIVE
 from src.entities.robot import Robot
 from src.entities.fruit import Fruit
-from pgzero.builtins import sounds
+from pgzero.builtins import sounds, music
 
 class Game:
     def __init__(self):
@@ -19,6 +19,11 @@ class Game:
         self.pending_enemies = []
         self.timer = 0
 
+        try:
+            music.play("theme")
+            music.set_volume(0.3) 
+        except Exception:
+            print("Warning: 'theme' music file not found in music/ folder.")
         self.next_level()
     
     def next_level(self):

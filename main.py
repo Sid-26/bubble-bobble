@@ -2,10 +2,11 @@ print("checking if imports")
 from src.app import App
 from src.game import Game
 from src.screens.menu import MenuScreen
+from src.consts import HEIGHT, WIDTH, TITLE
 import pgzero, pgzrun
 
-print("just before main")
-# if __name__ == "__main__":
+# print("just before main")
+
 print("trying to run main")
 app = App(MenuScreen(Game()))
 
@@ -13,12 +14,9 @@ def update():
     app.update()
 
 def draw():
-    if app:
-        app.draw(screen)
-    else:
-        screen.fill((0,0,0))
+    app.draw(screen)
     
-
+# if __name__ == "__main__":
 try:
     pgzrun.go()
     print("finished running")
