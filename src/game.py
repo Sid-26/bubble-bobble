@@ -3,6 +3,7 @@ from src.game_utils import char_width
 from src.consts import WIDTH, CHAR_WIDTH, IMAGE_WIDTH, LEVELS, NUM_COLUMNS, GRID_BLOCK_SIZE, LEVEL_X_OFFSET, NUM_ROWS, TYPE_NORMAL, TYPE_AGGRESSIVE
 from src.entities.robot import Robot
 from src.entities.fruit import Fruit
+from pgzero.builtins import sounds
 
 class Game:
     def __init__(self):
@@ -40,7 +41,7 @@ class Game:
 
         self.play_sound("level", 1)
     
-    def draw_text(self, text, y, x=None):
+    def draw_text(self, screen, text, y, x=None):
         if x == None:
             x = (WIDTH - sum([char_width(c) for c in text])) // 2
 
@@ -63,11 +64,11 @@ class Game:
         else:
             return False
 
-    def draw_status(self):
+    def draw_status(self, screen):
         number_width = CHAR_WIDTH[0]
         s = str(self.player.score)
-        draw_text(s, 451, WIDTH - 2 - (number_width * len(s)))
-        draw_text("LEVEL " + str(self.level + 1), 451)
+        self.draw_text(screen, s, 451, WIDTH - 2 - (number_width * len(s)))
+        self.draw_text(screen, "LEVEL " + str(self.level + 1), 451)
 
         lives_health = ["life"] * min(2, self.player.lives)
         if self.player.lives > 2:
@@ -99,6 +100,8 @@ class Game:
     def update(self, input_state):
         self.timer += 1
         for obj in self.fruits + self.bolts + self.enemies + self.pops + [self.player] + self.orbs:
+            if obj is None:
+                continue
             if obj == self.player:
                 obj.update(input_state)
             else:
@@ -122,7 +125,7 @@ class Game:
             if len([orb for orb in self.orbs if orb.trapped_enemy_type != None]) == 0:
                 self.next_level()
 
-    def draw(self):
+    def draw(self, screen):
         screen.blit("bg%d" % self.level_colour, (0, 0))
         block_sprite = "block" + str(self.level % 4)
 

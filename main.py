@@ -13,7 +13,11 @@ def update():
     app.update()
 
 def draw():
-    app.draw()
+    if app:
+        app.draw(screen)
+    else:
+        screen.fill((0,0,0))
+    
 
 try:
     pgzrun.go()
@@ -22,7 +26,3 @@ except Exception as e:
     print(f"Fatal Error: {e}")
     import traceback
     traceback.print_exc()
-
-# to do for future sid, please implement the player logic here with input state (COMPLETED)
-# further to do finish task C (Pause menu) (COMPLETED)
-# further further to do finish documentation

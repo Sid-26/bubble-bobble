@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from pgzero.builtins import keyboard
 
 @dataclass 
 class InputState:

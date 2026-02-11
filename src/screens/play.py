@@ -23,9 +23,9 @@ class PlayerScreen(Screen):
         else:
             self.game.update(input_state)
     
-    def draw(self):
-        self.game.draw()
-        self.game.draw_status()
+    def draw(self, screen):
+        self.game.draw(screen)
+        self.game.draw_status(screen)
 
         if self.paused:
             screen.draw.filled_rect(
@@ -34,6 +34,3 @@ class PlayerScreen(Screen):
             )
 
             self.game.draw_text("PAUSED", HEIGHT // 2)
-
-    def draw_status(self):
-        pass

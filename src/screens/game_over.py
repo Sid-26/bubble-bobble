@@ -11,7 +11,7 @@ class GameOverScreen(Screen):
             from .menu import MenuScreen
             app.change_screen(MenuScreen(Game()))
     
-    def draw(self):
-        self.game.draw()
-        self.game.draw_status()
+    def draw(self, screen):
+        self.game.draw(screen)
+        self.game.draw_status(screen)
         screen.blit("over", (0, 0))

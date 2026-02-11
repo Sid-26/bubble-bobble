@@ -14,10 +14,10 @@ class MenuScreen(Screen):
             new_game.player = player
             app.change_screen(PlayerScreen(new_game))
         else:
-            self.game.update()
+            self.game.update(input_state)
     
-    def draw(self):
-        self.game.update()
+    def draw(self, screen):
+        self.game.draw(screen)
         screen.blit("title", (0, 0))
         anim_frame = min(((self.game.timer + 40) % 160) // 4, 9)
         screen.blit("space" + str(anim_frame), (130, 280))
