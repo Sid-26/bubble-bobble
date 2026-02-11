@@ -12,7 +12,12 @@ if __name__ == "__main__":
     def draw():
         app.draw()
 
-    pgzrun.go()
+    try:
+        pgzrun.go()
+    except Exception as e:
+        print(f"Fatal Error: {e}")
+        import traceback
+        traceback.print_exc()
 
 # to do for future sid, please implement the player logic here with input state (COMPLETED)
 # further to do finish task C (Pause menu) (COMPLETED)
