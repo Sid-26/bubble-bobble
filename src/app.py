@@ -1,5 +1,4 @@
-import pygame, pgzero, pgzrun
-from input import InputStateManager
+from src.input import InputStateManager
 
 class App:
     def __init__(self, screen) -> None:

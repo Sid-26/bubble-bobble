@@ -1,8 +1,7 @@
-from screen import Screen
-from game_over import GameOverScreen
-from pgzero.builtins import screen
+from screens.screen import Screen
+from screens.game_over import GameOverScreen
 from pygame import Rect
-from consts import HEIGHT, WIDTH
+from src.consts import HEIGHT, WIDTH
 
 class PlayerScreen(Screen):
     def __init__(self, game):

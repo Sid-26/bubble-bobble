@@ -1,6 +1,6 @@
 from entities.gravity_actor import GravityActor
 from entities.orb import Orb
-from consts import HEIGHT, WIDTH
+from src.consts import HEIGHT, WIDTH
 
 class Player(GravityActor):
     def __init__(self, game):
