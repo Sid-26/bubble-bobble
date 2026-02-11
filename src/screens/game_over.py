@@ -1,5 +1,5 @@
-from screens.screen import Screen
-from screens.menu import MenuScreen
+from .screen import Screen
+from .menu import MenuScreen
 from src.game import Game
 from pgzero.builtins import screen
 

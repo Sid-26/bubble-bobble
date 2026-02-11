@@ -1,7 +1,7 @@
-from screens.screen import Screen
+from .screen import Screen
 from src.game import Game
-from entities.player import Player
-from screens.play import PlayerScreen
+from src.entities.player import Player
+from .play import PlayerScreen
 from pgzero.builtins import screen
 
 class MenuScreen(Screen):

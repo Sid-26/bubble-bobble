@@ -1,5 +1,5 @@
-from screens.screen import Screen
-from screens.game_over import GameOverScreen
+from .screen import Screen
+from .game_over import GameOverScreen
 from pygame import Rect
 from src.consts import HEIGHT, WIDTH
 
