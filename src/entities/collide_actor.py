@@ -1,5 +1,5 @@
-from consts import ANCHOR_CENTRE, GRID_BLOCK_SIZE
-from pgzero.builtins import Actor
+from src.consts import ANCHOR_CENTRE, GRID_BLOCK_SIZE
+from pgzero.actor import Actor
 
 class CollideActor(Actor):
     def __init__(self, game, pos, anchor=ANCHOR_CENTRE):

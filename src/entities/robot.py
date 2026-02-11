@@ -1,4 +1,4 @@
-from consts import TYPE_AGGRESSIVE, TYPE_NORMAL
+from src.consts import TYPE_AGGRESSIVE, TYPE_NORMAL
 from entities.gravity_actor import GravityActor
 from entities.bolt import Bolt
 from random import randint, choice, random
