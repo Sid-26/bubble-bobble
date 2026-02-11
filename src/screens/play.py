@@ -1,5 +1,5 @@
 from .screen import Screen
-from .game_over import GameOverScreen
+
 from pygame import Rect
 from src.consts import HEIGHT, WIDTH
 
@@ -18,6 +18,7 @@ class PlayerScreen(Screen):
 
         if self.game.player.lives < 0:
             self.game.play_sound("over")
+            from .game_over import GameOverScreen
             app.change_screen(GameOverScreen(self.game))
         else:
             self.game.update(input_state)
