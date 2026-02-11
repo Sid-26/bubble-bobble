@@ -33,4 +33,4 @@ class PlayerScreen(Screen):
                 (0, 0, 0, 150)
             )
 
-            self.game.draw_text("PAUSED", HEIGHT // 2)
+            self.game.draw_text(screen, "PAUSED", HEIGHT // 2)

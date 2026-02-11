@@ -10,6 +10,14 @@ class Game:
         self.player = None
         self.level_colour = -1
         self.level = -1
+        self.grid = []
+        self.fruits = []
+        self.bolts = []
+        self.enemies = []
+        self.pops = []
+        self.orbs = []
+        self.pending_enemies = []
+        self.timer = 0
 
         self.next_level()
     
@@ -80,7 +88,6 @@ class Game:
         for image in lives_health:
             screen.blit(image, (x, 450))
             x += IMAGE_WIDTH[image]
-            self.next_level()
 
     def fire_probability(self):
         return 0.001 + (0.0001 * min(100, self.level))
@@ -121,9 +128,10 @@ class Game:
             pos = (self.get_robot_spawn_x(), -30)
             self.enemies.append(Robot(self, pos, robot_type))
 
-        if len(self.pending_enemies + self.fruits + self.enemies + self.pops) == 0:
-            if len([orb for orb in self.orbs if orb.trapped_enemy_type != None]) == 0:
+        if not self.pending_enemies and not self.enemies and not self.fruits and not self.pops:
+            if all(o.trapped_enemy_type is None for o in self.orbs):
                 self.next_level()
+
 
     def draw(self, screen):
         screen.blit("bg%d" % self.level_colour, (0, 0))

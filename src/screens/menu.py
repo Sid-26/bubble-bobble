@@ -12,6 +12,7 @@ class MenuScreen(Screen):
             new_game = Game()
             player = Player(new_game)
             new_game.player = player
+            player.reset()
             app.change_screen(PlayerScreen(new_game))
         else:
             self.game.update(input_state)
