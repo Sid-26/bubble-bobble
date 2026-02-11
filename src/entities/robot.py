@@ -7,7 +7,6 @@ from src.game_utils import sign
 class Robot(GravityActor):
     def __init__(self, game, pos, type):
         super().__init__(game, pos)
-
         self.type = type
 
         self.speed = randint(1, 3)

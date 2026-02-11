@@ -5,7 +5,6 @@ class Bolt(CollideActor):
 
     def __init__(self, game, pos, dir_x):
         super().__init__(game, pos)
-
         self.direction_x = dir_x
         self.active = True
 

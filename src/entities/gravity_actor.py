@@ -7,7 +7,6 @@ class GravityActor(CollideActor):
 
     def __init__(self, game, pos):
         super().__init__(game, pos, ANCHOR_CENTRE_BOTTOM)
-
         self.vel_y = 0
         self.landed = False
 

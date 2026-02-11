@@ -8,6 +8,12 @@ class Player(GravityActor):
 
         self.lives = 2
         self.score = 0
+        self.health = 3
+        self.vel_y = 0
+        self.direction_x = 1
+        self.fire_timer = 0
+        self.hurt_timer = 100
+        self.blowing_orb = None
 
     def reset(self):
         self.pos = (WIDTH / 2, 100)
