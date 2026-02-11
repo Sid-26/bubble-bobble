@@ -1,4 +1,4 @@
-from entities.collide_actor import CollideActor
+from .collide_actor import CollideActor
 
 class Bolt(CollideActor):
     SPEED = 7

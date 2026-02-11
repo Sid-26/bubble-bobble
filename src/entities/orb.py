@@ -1,6 +1,6 @@
-from entities.collide_actor import CollideActor
-from entities.fruit import Fruit
-from entities.pop import Pop
+from .collide_actor import CollideActor
+from .fruit import Fruit
+from .pop import Pop
 from random import randint
 
 class Orb(CollideActor):

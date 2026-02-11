@@ -1,6 +1,6 @@
 from random import choice
-from entities.gravity_actor import GravityActor
-from entities.pop import Pop
+from .gravity_actor import GravityActor
+from .pop import Pop
 from src.consts import TYPE_NORMAL
 
 class Fruit(GravityActor):

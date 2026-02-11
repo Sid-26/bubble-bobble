@@ -1,4 +1,4 @@
-from consts import CHAR_WIDTH, LEVEL_X_OFFSET, GRID_BLOCK_SIZE, NUM_ROWS, NUM_COLUMNS
+from src.consts import CHAR_WIDTH, LEVEL_X_OFFSET, GRID_BLOCK_SIZE, NUM_ROWS, NUM_COLUMNS
 
 # utility functions that dont belong to any single class
 def sign(x):

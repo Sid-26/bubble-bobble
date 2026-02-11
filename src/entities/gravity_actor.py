@@ -1,4 +1,4 @@
-from entities.collide_actor import CollideActor
+from .collide_actor import CollideActor
 from src.consts import ANCHOR_CENTRE_BOTTOM, HEIGHT
 from src.game_utils import sign
 

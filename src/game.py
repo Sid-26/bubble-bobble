@@ -1,9 +1,8 @@
 from random import randint, shuffle
-import pgzero
-from src.game_utils import char_width, draw_text
-from consts import WIDTH, CHAR_WIDTH, IMAGE_WIDTH, LEVELS, NUM_COLUMNS, GRID_BLOCK_SIZE, LEVEL_X_OFFSET, NUM_ROWS, TYPE_NORMAL, TYPE_AGGRESSIVE
-from entities.robot import Robot
-from entities.fruit import Fruit
+from src.game_utils import char_width
+from src.consts import WIDTH, CHAR_WIDTH, IMAGE_WIDTH, LEVELS, NUM_COLUMNS, GRID_BLOCK_SIZE, LEVEL_X_OFFSET, NUM_ROWS, TYPE_NORMAL, TYPE_AGGRESSIVE
+from src.entities.robot import Robot
+from src.entities.fruit import Fruit
 
 class Game:
     def __init__(self):

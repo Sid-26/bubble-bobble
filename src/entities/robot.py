@@ -1,8 +1,8 @@
 from src.consts import TYPE_AGGRESSIVE, TYPE_NORMAL
-from entities.gravity_actor import GravityActor
-from entities.bolt import Bolt
+from .gravity_actor import GravityActor
+from .bolt import Bolt
 from random import randint, choice, random
-from game_utils import sign
+from src.game_utils import sign
 
 class Robot(GravityActor):
     def __init__(self, game, pos, type):

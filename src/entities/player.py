@@ -1,5 +1,5 @@
-from entities.gravity_actor import GravityActor
-from entities.orb import Orb
+from .gravity_actor import GravityActor
+from .orb import Orb
 from src.consts import HEIGHT, WIDTH
 
 class Player(GravityActor):
